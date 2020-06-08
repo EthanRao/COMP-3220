@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg936\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl-380\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 load "./TinyToken.rb"\
+load "./TinyScanner.rb"\
+# if the file(s) are in the same directory, you can simply precede\
+# the file name(s) with ./\
+\
+# input.tiny below is simply the "source code"\
+# that you write that adheres to your grammar rules\
+# if it is in the same directory as this file, you can\
+# simply include the file name, otherwise, you will need\
+# to specify the entire path to the file as we did above\
+# to load the other ruby modules\
+\
+# the code below will open a file so that I \
+# can save tokens to it\
+\
+# keep "fetching" one token at a time, using your scanner\
+# until there are no tokens left to scan \
+   \
+   # The instruction below writes your token into a file.\
+scan = Scanner.new("input.tiny")     \
+output = open("output.txt", 'w')   \
+tok = scan.nextToken()     \
+\
+   # get the next token available (if there is one)\
+while (tok.get_type() != Token::EOF)  \
+   puts "Token: #\{tok.get_type()\} Lexeme: #\{tok.get_text()\}"     #prints the token + the type to console\
+   output.write("Token: #\{tok\} \\ttype: #\{tok.get_type()\}\\n") #writes to file\
+   tok = scan.nextToken()             #gets the next token.\
+end\
+puts "Token: #\{tok\} \\ttype: #\{tok.get_type()\}"  #prints the EOF\
+output.write("Token: #\{tok\} \\ttype: #\{tok.get_type()\}\\n") #Writes the EOF to file\
+output.close() #closes file\
+\
+# There should be one token left (see the boolean condition above)\
+# putting the last token in the file and closing the file\
+}
